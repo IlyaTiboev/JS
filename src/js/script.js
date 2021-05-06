@@ -1,13 +1,21 @@
 "use strict";
 
-let incr = 10,
-    decr = 10;
-incr++; /* оператор прибавления */
-decr--; /* оператор отнимания */
+const numberOfFilms = +prompt('Сколько фильмов вы просмотрели?', '');
 
-console.log(incr);
-console.log(decr);
+const personalMovieDB = {
+    count: numberOfFilms,
+    movies: {},
+    actors: {},
+    genres: [],
+    privat: false
+};
 
-console.log(132%17); /* показывает остаток после деления 132 на 17 */
+const a = prompt('Один из последних просмотренных фильмов?', ''),
+    b = prompt('На сколько оцените его?', ''),
+    c = prompt('Один из последних просмотренных фильмов?', ''),
+    d = prompt('На сколько оцените его?', '');
 
-console.log(2*4 == 8); /* оператор равенства */
+personalMovieDB.movies[a] = b;
+personalMovieDB.movies[c] = d;
+
+console.log(personalMovieDB);
