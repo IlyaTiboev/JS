@@ -103,3 +103,81 @@ for (let i = 1; i < 8; i++) {
     console.log(nim);
     nim++;
 }
+
+// ФУНКЦИИ
+
+let nem = 20;
+
+function showFirstMessage(text) {
+    let nem = 30;
+    console.log(text);
+    console.log(nem);
+}
+
+showFirstMessage('Ebanoe govno');
+console.log(nem);
+
+
+
+function calc(a, b) {
+    return(a + b);            /* ретерн как окончание функции, после него код не работает */
+}
+
+console.log(calc(4, 3));
+console.log(calc(8, 15));
+console.log(calc(7, 40));
+
+
+function ret() {
+    let nem = 30;
+    return nem;
+}
+
+const anotherNem = ret();
+console.log(anotherNem);
+
+// ФУНКЦИЯ ВЫРАЖЕНИЯ
+
+const logger = function(a, b) {
+    return (a + b);
+};
+
+console.log(logger (4, 5));
+
+
+// СТРЕЛОЧНАЯ ФУНКЦИЯ
+
+const cal = (a, b) => a + b;
+
+console.log(cal (4, 4));
+
+// МЕТОДЫ И СВОЙСТВА СТРОК И ЧИСЕЛ
+
+const str = 'test';
+const array = [1, 3, 6];
+
+console.log(str.toUpperCase()); /* метод для превращения в верхний регистр */
+console.log(str[2]);
+console.log(array. length); /* ленгс - свойство сроки эррэй */
+
+
+let fruit = 'Some fruit';
+
+console.log(fruit.indexOf('fruit')); /* метод для поиска чего-то в строке\числе. при отсутствии дает -1 */
+
+
+const logg = 'hello bitch';
+
+console.log(logg.slice(6, 11)); /* вырезает кусок  с A до B */
+console.log(logg.substring(6, 11)); /* вырезает кусок  с A до B */
+console.log(logg.substring(6, 5)); /* вырезает с A заданное количество символов (B) */
+
+
+const nam = 12.2;
+console.log(Math.round(nam)); /* Метод округления */
+
+
+const tess = '12.2px';
+console.log(parseInt(tess)); /* превращает срочку в целое число */
+console.log(parseFloat(tess)); /* превращает срочку в натуральное число */
+
