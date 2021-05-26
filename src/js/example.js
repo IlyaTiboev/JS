@@ -181,3 +181,289 @@ const tess = '12.2px';
 console.log(parseInt(tess)); /* превращает срочку в целое число */
 console.log(parseFloat(tess)); /* превращает срочку в натуральное число */
 
+
+// ФУНКЦИЯ КОЛЛБЭК
+
+function first() {
+    setTimeout(function() {
+        console.log(1);
+    }, 500);
+}
+
+function second() {
+    console.log(2);
+}
+
+first();
+second();                               /* Выполнится сначала сэконд, потом ферст, т.к. у ферста задержка */
+
+function learnJS(lang, callback) {
+    console.log(`I learn ${lang}`);
+    callback();                     /* позволяет выполнять действие только после первого действия */
+}
+
+learnJS('JavaScript', function() {
+    console.log('I did it!');
+});
+
+
+// ОБЪЕКТЫ
+
+const options = {
+    name: 'hui',
+    width: 2048,
+    height: 1024,
+    colors: {
+        border: 'black',
+        bg: 'red'
+    },
+    makeTest: function() {       /* Создает метод для объекта, чтобы он умел что-то делать */
+        console.log('Test');
+    }
+};
+
+options.makeTest();
+
+delete options.name;     /* удаляет свойство из объекта */
+
+console.log(options.name);
+
+for (let key in options) {
+    if (typeof(options[key]) === 'object') {
+        for (let i in options[key]) {
+            console.log(`Свойство ${i} имеет значение ${options[key] [i]}`);
+        }
+    } else {
+        console.log(`Свойство ${key} имеет значение ${options[key]}`); /* Способ перебора в объекте */
+    }
+}
+
+Object.keys(options);   /* выводит все ключи в объекте */
+Object.keys(options).length; /* выводит количество ключей в объекте */ 
+
+
+// ДЕСТРУКТУРИЗАЦИЯ ОБЪЕКТОВ
+
+const option = {
+    name: 'hui',
+    width: 2048,
+    height: 1024,
+    colors: {
+        border: 'black',
+        bg: 'red'
+    },
+    makeTest: function() {       /* Создает метод для объекта, чтобы он умел что-то делать */
+        console.log('Test');
+    }
+};
+
+option.makeTest();
+
+const {border, bg} = option.colors;      /* вытаскивает свойства объекта в отдельную переменную */
+
+
+// МАССИВЫ и методы
+
+
+const arrey = [1, 2, 3, 4, 5];
+
+arrey.pop();     /* удаляет последнее значение из массива */
+arrey.push(20);    /* помещает указанное значение в конец массива */
+
+console.log(arrey);
+
+// переберет все элементы массива
+for (let i=0; i < arrey.length; i++) {
+    console.log(arrey[i]);
+}
+
+for (let value of arrey) {        /* метод Как фор ин перебирает элементы массивов, псевдо-, строк */
+    console.log(value);
+}
+
+                    //  1    2    3              1- значение элемента, 2- номер по порядку, 3- сам массив
+arrey.forEach(function(item, f, arrey) {         /*перебирает элементы массивов и назначает каждому элементу код внутри */
+    console.log(`${f}: ${item} внутри массива ${arrey}`);
+});
+
+
+const stro = prompt('', '');
+const products = stro.split(', ');      /* На основании строк формирует массив */
+products.sort();                        /* Сортирует элементы как строки */
+console.log(products.join('; '));        /* На основании массива формирует строки */
+
+// Алгоритм для сортировки элементов не как строк
+smth.sort(compareNum);
+function compareNum(a, b) {
+    return a - b;
+}
+
+// ПЕРЕДАЧА ДАННЫХ ПО ССЫЛКЕ И ЗНАЧЕНИЮ
+
+let a = 5,                  /* В примитивах А запишется как 5 и дальше будет отрабатывать по коду */
+    b = a;
+b = b + 5;
+
+console.log(b);
+console.log(a);
+
+
+const p = {
+    a: 5,
+    b: 1
+};
+
+const c = p;                /* в Р находится ссылка, а не копия переменной Р */
+
+c.a = 10;
+
+console.log(c);
+console.log(p);
+
+// ФУНКЦИЯ ДЛЯ КОПИРОВАНИЯ ОБЪЕКТОВ
+
+function copy(mainObj) {                    /* стартуем функцию КОПИ */
+    let objCopy = {};                       /* объяв. объект, в который все будет копироваться */
+
+    let key;
+    for (key in mainObj) {                  /* стартуем перебор аргумента, где при переборе будут копироваться свойства */
+        objCopy[key] = mainObj[key];
+    }
+
+    return objCopy;                         /* возвращаем значение объекта */
+}
+
+const mem = {
+    a: 2,
+    b: 5,
+    c: {
+        x: 7,
+        y: 4
+    }
+};
+
+const newMem = copy(mem);
+
+newMem.a = 10;                      /* Поменяет значение в копии*/
+newMem.c.x = 10;                    /* Поменяет значение в двух объектах, так как это поверхностная копия */
+
+console.log(mem);
+console.log(newMem);
+
+// ДОБАВЛЕНИЕ СВОЙСТВ ОБЪЕКТА В ДРУГОЙ
+const add = {
+    d: 16,
+    e: 30
+};
+
+                // 1       2    3      1 - свойство объекта для копии, 2 - куда копировать, 3 - откуда копировать
+console.log(Object.assign(mem, add));
+
+// Копирует свойства объекта add в новый объект copy
+const copy = Object.assign({}, add);
+
+// КОПИЯ МАССИВА
+
+const oldArray = ['a', 'b', 'c'];
+const newArray = oldArray.slice();     /* Вырезает значения МАССИВА */
+
+newArray[1] = 'fuck';
+console.log(newArray);
+console.log(oldArray);
+
+// ОПЕРАТОР РАЗВОРОТА СПРЭД
+const video = ['youtube', 'vimeo', 'coub'],
+      blogs = ['wordpress', 'livejournal', 'VK'],
+      internet = [...video, ...blogs, 'facebook'];        /* троеточее разворачивает массив */
+
+console.log(internet);
+
+
+function log(a, b, c ) {
+    console.log(a);
+    console.log(b);
+    console.log(c);
+}
+
+const nnn = [2, 5, 7];
+
+log(...nnn);                /* Засовывает массив в функцию */
+
+
+const ar = ['a', 'b'];
+const newAr = [...ar];      /* засовывает массив в массив  */
+
+console.log(newAr);
+
+
+const q = {
+    one: 1,
+    two: 2
+};
+
+const newQ = {...q};        /* Засовывает свойства объекта в другой */
+console.log(newQ);
+
+
+// ПРОТОТИПНО-ОРИЕНТИРОВННОЕ НАСЛЕДОВАНИЕ
+
+const soldier = {
+    health: 400,
+    armor: 100,
+    sayHello: function() {
+        console.log('hello');
+    }
+};
+
+const ivan = Object.create(soldier);      /* Создает объект на основе прототипа */
+
+/* const ivan = {
+    health: 100
+}; */
+
+// ivan.__proto__ = soldier;        /* произойдет наследование от солдата ивану, устаревший вариант  */
+
+Object.setPrototypeOf(ivan, soldier);      /* произойдет наследование от солдата ивану в динамике, когда уже существует иван*/
+
+ivan.sayHello();
+
+
+const age = 13;
+
+if (!(age >= 14 && age <= 90)) {
+    console.log('Normas');
+}
+
+
+console.log(Boolean(age));
+
+
+
+// ДИНАМИЧЕСКАЯ ТИПИЗАЦИЯ
+// to string
+
+// 1
+console.log(typeof(String(null)));
+// 2
+console.log(typeof(5 + ''));
+
+const nn = 5;
+console.log('httos://vk.com/catalog' + nn);
+
+// to number 
+
+// 1
+console.log(typeof(Number("4")));
+// 2
+console.log(typeof(+'5'));
+// 3
+console.log(typeof(parseInt('15px', 10)));
+
+//to boolean
+
+// 1
+// 0, '', null, undefined, NaN - всe false
+// 2
+console.log(typeof(Boolean('')));
+// 3
+console.log(typeof(!!'4'));
